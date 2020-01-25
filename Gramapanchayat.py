@@ -18,6 +18,23 @@ class Grama:
         print(gpms)
         return gpms
 
+    def name_input(con):
+        name = str(input("Enter the name : "))
+        return name
+
+    def pincode_input(con):
+        try:
+            pincode = int(input("Enter the pincode : "))
+            return pincode
+
+        except:
+            print('Wrong pincode entered Please enter correct format')
+            return None
+
+    def area_input(con):
+        area = str(input("Enter the area of residence : "))
+        return area
+
     def Update_GPM(con,buname, gpmid):
         cursorObj = con.cursor()
         cursorObj1 = con.cursor()
@@ -26,9 +43,12 @@ class Grama:
             print('No GPMs with the username exists')
             return False
         cursorObj.execute('SELECT * from GPM where Bdo_id= ? ', (buname,))
-        name = input('Enter the updated GPM name : ')
-        area = input('Enter the updated GPM area : ')
-        pincode = input('Enter the updated GPM pincode : ')
+        name = Grama.name_input(con)
+        area = Grama.area_input(con)
+        pincode = Grama.pincode_input(con)
+        while pincode is None:
+            print('Please try again')
+            pincode = Grama.pincode_input(con)
 
         updateGpmentity = (name, area, pincode, gpmid)
         cursorObj.execute(

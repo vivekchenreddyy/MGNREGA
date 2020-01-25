@@ -1,10 +1,10 @@
 import sqlite3
 from sqlite3 import Error
 import pandas as pd
-from Gramapanchayat import Grama
-from Projects import Projects
-from User import User
-from Member import Memberclass
+from test.Gramapanchayat import Grama
+from test.Projects import Projects
+from test.User import User
+from test.Member import Memberclass
 def sql_connection():
     try:
         con = sqlite3.connect('MGNREGA.db')

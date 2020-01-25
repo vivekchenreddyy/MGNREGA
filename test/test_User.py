@@ -1,10 +1,9 @@
-import builtins
 import sqlite3
 import unittest
 from sqlite3 import Error
 from unittest.mock import patch
 
-from User import User
+from test.User import User
 
 
 class TestCase(unittest.TestCase):
@@ -18,16 +17,16 @@ class TestCase(unittest.TestCase):
 
     def tearDown(self) -> None:
         cursorObj = self.con.cursor()
-        cursorObj.execute('DELETE from Users')
-        cursorObj.execute('DELETE from Members')
-        cursorObj.execute('DELETE from GPM')
+        # cursorObj.execute('DELETE from Users')
+        # cursorObj.execute('DELETE from Members')
+        # cursorObj.execute('DELETE from GPM')
         self.con.commit()
 
 
     #
     #
-    # def test_delete_account():
-    #     assert User.delete_account(con, 'bdo', 'admin')
+    def test_delete_account(self):
+        assert User.delete_account(self.con, 'bdo', 'admin')
 
     @patch.object(User, 'username_input')
     @patch.object(User, 'password_input')

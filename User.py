@@ -55,7 +55,7 @@ class User:
         pincode=User.pincode_input(con)
         while pincode is None:
             print('Please try again')
-            User.pincode_input(con)
+            pincode=User.pincode_input(con)
         area=User.area_input(con)
         signupentity = (uname, passwd, name, role)
 
