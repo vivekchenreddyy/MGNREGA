@@ -79,6 +79,7 @@ def BDO(buname):
         if choice == "1":
             print('Here you can add new GPM accounts')
             bdoid = buname
+
             User.sign_up(con, 'gpm', bdoid)
 
         elif choice == "2":
@@ -99,7 +100,7 @@ def BDO(buname):
             df.columns = ['name', 'username', 'area', 'pincode', 'BdoUsername']
             print(df)
             gpmid = input('Enter the GpmId you want to update : ')
-            Grama.Update_GPM(con, gpmid)
+            Grama.Update_GPM(con,buname, gpmid)
 
         elif choice == "4":
             print('Here you can Create a project')
@@ -152,9 +153,12 @@ def BDO(buname):
                 Complaints_received=cursorObj.fetchall()
                 pd.set_option('display.width', None)
                 df = pd.DataFrame(Complaints_received)
-                df.columns = ['Id', 'Issue', 'MemberId','Bdo_remarks','Gpm_remarks']
-                print(df)
-
+                try:
+                    df.columns = ['Id', 'Issue', 'MemberId','Bdo_remarks','Gpm_remarks']
+                    print(df)
+                except:
+                    print('')
+                    BDO(buname)
         elif choice == "11":
             Projects.show_projects(con)
             cursorObj = con.cursor()
@@ -213,7 +217,7 @@ def Member(muname):
         choice = input(">>> ").lower().rstrip()
         if choice == "1":
             print('Welcome You can check your details here')
-            Projects.show_my_details(con, muname)
+            Memberclass.show_my_details(con, muname)
 
         elif choice == "2":
             print('Here you can file complaints against your BDO and GPM')
